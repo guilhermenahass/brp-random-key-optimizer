@@ -1,0 +1,11 @@
+*.exe
+*.o
+cpp/Program/runRKO
+cpp/Results/*.csv
+cpp/Results/*.txt
+cpp/Results/logs/
+__pycache__/
+*.png
+!docs/img/*.png
+python/brp_moves.csv
+python/*.png
