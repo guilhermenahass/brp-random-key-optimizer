@@ -1,5 +1,7 @@
 # Block Relocation Problem com Random-Key Optimizer
 
+[![CI](https://github.com/guilhermenahass/brp-random-key-optimizer/actions/workflows/ci.yml/badge.svg)](https://github.com/guilhermenahass/brp-random-key-optimizer/actions/workflows/ci.yml)
+
 **Otimização do desempilhamento de contêineres e blocos com meta-heurísticas de chaves aleatórias (C++ e Python).**
 
 Iniciação Científica com bolsa FAPESP, Engenharia de Produção na UFSCar. Artigo aprovado e apresentado no **ENEGEP 2026** (XLVI Encontro Nacional de Engenharia de Produção). Pôster apresentado no **ONPCE 2026**.
@@ -70,6 +72,7 @@ cpp/
   Instances/                      benchmarks Caserta et al. (2012) e Zhu et al. (2012)
 python/brp_rko.py                 versão didática em Python: decoder + mini-RKO (SA e GA) numa instância pequena
 scripts/animate_yard.py           gera o GIF do pátio a partir do log da melhor solução
+scripts/ci_check.py               confere no CI se a solução é viável e bate com o log
 results/                          tabelas do artigo
 docs/                             artigo completo e pôster
 ```
@@ -99,6 +102,10 @@ python scripts/animate_yard.py cpp/Results/draws/<arquivo-draw> docs/img/yard.gi
 ```bash
 python python/brp_rko.py
 ```
+
+## Integração contínua
+
+A cada commit, o GitHub Actions compila o C++, resolve uma instância real do benchmark e confere se a solução é viável: todos os blocos retirados e o número de realocações do log igual ao custo informado. Também roda o demo em Python.
 
 ## Stack
 

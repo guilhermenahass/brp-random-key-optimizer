@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  rko:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compilar o RKO (C++20 + OpenMP)
+        working-directory: cpp/Program
+        run: g++ -std=c++20 -O3 -fopenmp -o runRKO src/Main/main.cpp
+      - name: Resolver uma instância do benchmark de Zhu et al. (10 s)
+        working-directory: cpp/Program
+        run: |
+          printf 'SA\nILS\nPSO\nBRKGA\n\nMAXRUNS 1\ndebug 0\ncontrol 1\nstrategy 1\nrestart 1\nsizePool 10\n' > config/config_tests.conf
+          ./runRKO ../Instances/2012zhu/7-10-63/11801.txt 10 SA,ILS,PSO,BRKGA
+      - name: Conferir a solução
+        run: python3 scripts/ci_check.py
+      - name: Demo em Python
+        run: python3 python/brp_rko.py
